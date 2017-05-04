@@ -20,7 +20,7 @@ section {
 	width: 90%;
 	margin: 0 auto;
 	margin-top: -40px;
-	padding: 80px 40px 20px 100px;
+	padding: 150px 40px 20px 100px;
 }
 
 ul {
@@ -55,6 +55,13 @@ h3 {
 
 .header-info .contact {
 	padding-top: 7px;
+}
+
+.logo-permanente {
+	width: 200px;
+	position: absolute;
+	top: 10%;
+	left: 3%;
 }
 
 /*------ Lateral Navigation --------*/
@@ -102,12 +109,11 @@ nav .tooltip-inner {
 /*-------- Nosotros --------- */
 
 #nosotros .row {
-	position: relative;
-	height: 100%;
+	margin-top: -70px;
 }
 
 #nosotros .row > div:first-child {
-	padding: 20% 2%;
+	padding: 15% 2%;
 }
 
 .circulos {
@@ -515,6 +521,10 @@ nav .tooltip-inner {
 	.content--center {
 		max-width: 100vw;
 	}
+}
+
+#portafolio .content {
+	overflow-y: scroll;
 }
 
 /*------ Contacto -----*/
