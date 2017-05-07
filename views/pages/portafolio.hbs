@@ -1,4 +1,4 @@
-<section id="portafolio" class="page loading js">
+<section id="portafolio" class="loading js">
     <div class="row">
         <div class="col-xs-12 col-md-3 categorias">
             <h3>Conoce nuestro trabajo</h3>
@@ -10,56 +10,32 @@
             <button data-filter=".ilustracion" class="button">Ilustración</button>
             <button data-filter=".multimedia" class="button">Multimedia</button>
         </div>
-
         <div class="content content--center col-xs-12 col-md-9">
             <div id="grid" class="grid">
                 <div class="grid__sizer"></div>
-                <div class="grid__item ilustracion">
-                    <a class="grid__link" href="#"><img class="grid__img" src="/img/ilustracion1.jpg" alt="imagen de un pajaro" /></a>
+                {{#each proyectos}}
+                <div class="grid__item {{this.tipo}}">
+                    <a class="grid__link" data-title="{{this.proyecto}}" data-descripcion="{{this.descripcion}}"
+                       data-img="{{this.imgUrl}}" href="#">
+                        <img class="grid__img" src="{{this.imgUrl}}" alt="{{this.descripcion}}" />
+                    </a>
                 </div>
-                <div class="grid__item ilustracion">
-                    <a class="grid__link" href="#"><img class="grid__img" src="/img/ilustracion2.jpg" alt="cabeza de perro" /></a>
-                </div>
-                <div class="grid__item multimedia">
-                    <a  class="grid__link" href="#"><img class="grid__img" src="/img/multimedia1.jpg" alt="botella de vino y copa" /></a>
-                </div>
-                <div class="grid__item multimedia">
-                    <a class="grid__link" href="#"><img class="grid__img" src="/img/multimedia2.png" alt="logo omg 3d" /></a>
-                </div> 
-                <div class="grid__item web">
-                    <a class="grid__link" href="#"><img class="grid__img" src="/img/web1.jpg" alt="computador con web" /></a>
-                </div>
-                <div class="grid__item editorial">
-                    <a class="grid__link" href="#">
-                    <img class="grid__img" src="/img/editorial1.jpg" alt="portada libro de barrios" /></a>
-                </div>
-                 <div class="grid__item editorial">
-                    <a class="grid__link" href="#">
-                    <img class="grid__img" src="/img/editorial2.jpg" alt="portada libro de barrios" /></a>
-                </div>
-                  <div class="grid__item editorial">
-                    <a class="grid__link" href="#">
-                    <img class="grid__img" src="/img/editorial3.jpg" alt="interior libro de barrios" /></a>
-                </div>
-                <div class="grid__item editorial">
-                    <a class="grid__link" href="#">
-                    <img class="grid__img" src="/img/editorial4.jpg" alt="interior libro de barrios" /></a>
-                </div>
-                <div class="grid__item encuadernacion">
-                    <a class="grid__link" href="#">
-                    <img class="grid__img" src="/img/encuadernacion1.jpg" alt="encuadernacion belga" /></a>
-                </div>
-                <div class="grid__item encuadernacion">
-                    <a class="grid__link" href="#">
-                    <img class="grid__img" src="/img/encuadernacion2.jpg" alt="encuadernacion puntada larga" /></a>
-                </div>
-                <div class="grid__item branding">
-                    <a class="grid__link" href="#">
-                    <img class="grid__img" src="/img/branding1.png" alt="logo ente" /></a>
-                </div>
+                {{/each}}
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <button type="button" class="close" data-dismiss="modal"></button>
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <p class="modal-descripcion"></p>
+            </div>
+        </div>
+    </div>
+    <script src="/js/jquery.js"></script>
     <script src="/js/imagesloaded.pkgd.min.js"></script>
     <script src="/js/masonry.pkgd.min.js"></script>
     <script src="/js/isotope.pkgd.min.js"></script>
@@ -93,5 +69,20 @@
                 event.target.classList.add('is-active');
             });
         });
+
+        var imgLinks = Array.from(document.querySelectorAll('.grid__link'));
+        imgLinks.forEach(function (link) {
+            link.addEventListener('click', superFn);
+        });
+
+        var modal = document.querySelector('#myModal .modal-dialog');
+        var modalTitle = document.querySelector('.modal-title');
+        var modalDescripcion = document.querySelector('.modal-descripcion');
+        function superFn() {
+            modalTitle.innerHTML = this.dataset.title;
+            modalDescripcion.innerHTML = this.dataset.descripcion;
+            modal.style.backgroundImage = "url(" + this.dataset.img + ")";
+            $('#myModal').modal('show');
+        }
     </script>
 </section>

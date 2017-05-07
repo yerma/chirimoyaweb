@@ -24,6 +24,7 @@
 </head>
 <body>
 <div class="header-info navbar-fixed-top">
+    <a class="logo-permanente" href="/"><img src="/img/chirilogo-02.svg" alt="Logo Chirimoya"></a>
     <div class="container-fluid">
         <ul class="contact pull-left">
             <li><i class="fa fa-phone"></i> +56 9 9999 9999</li>
@@ -37,8 +38,16 @@
     </div>
 </div>
 
-<!--<img src="/img/chirilogo-01.svg" alt="Logo Chirimoya" class="logo-permanente">-->
-{{>navigation}}
+<nav>
+    <ul>
+        <li><a data-target="/"><span class="mytooltip">Inicio</span></a></li>
+        <li><a data-target="nosotros"><span class="mytooltip">Nosotros</span></a></li>
+        <li><a data-target="servicios"><span class="mytooltip">Servicios</span></a></li>
+        <li><a data-target="portafolio"><span class="mytooltip">Portafolio</span></a></li>
+        <li><a data-target="contacto"><span class="mytooltip">Contacto</span></a></li>
+    </ul>
+</nav>
+
 {{{body}}}
 
 <script src="/js/jquery.js"></script>
@@ -53,12 +62,29 @@
 
     $(function(){
         $('[data-toggle="tooltip"]').tooltip();
+        var hash = window.location.pathname;
+        if(hash == '/') {
+            header.classList.remove('no-inicio');
+        } else {
+            if(!header.classList.contains('no-inicio')) { header.classList.add('no-inicio'); }
+        }
 
-        window.onhashchange = function () {
-            console.log('change');
-            var section = document.querySelector('section');
-            $('#tt-' + section.id).tooltip("show");
-        };
+        $('nav a').removeClass('active');
+
+        var currentSection = document.querySelector('section').id;
+        if(currentSection === 'inicio') { currentSection = '/'; }
+        var linkActivo = $('a[data-target="'+ currentSection + '"]');
+        linkActivo.tooltip('show');
+        linkActivo.addClass('active');
+    });
+
+    var header = document.querySelector('.header-info');
+
+    $('nav a').on('click', function() {
+        var target = this.dataset.target;
+        setTimeout(function () {
+            window.location.href = target;
+        }, 0);
     });
 
 </script>

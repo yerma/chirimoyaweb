@@ -142,7 +142,7 @@
 
     window.GridLoaderFx = GridLoaderFx;
 
-    var portafolio = document.querySelector('#portafolio'),
+    var portafolio = document.querySelector('section#portafolio'),
         currentGrid = document.querySelector('#grid'),
         loader = new GridLoaderFx(currentGrid),
         loadingTimeout;
@@ -155,9 +155,10 @@
                 percentPosition: true,
                 transitionDuration: 0
             });
+            portafolio.classList.remove('loading');
+            console.log(portafolio);
             m.layout();
             applyFx();
-            portafolio.classList.remove('loading');
         });
     }
 
@@ -168,7 +169,7 @@
         loadingTimeout = setTimeout(function() {
             currentGrid.classList.remove('grid--loading');
             loader._render();
-        }, 1500);
+        }, 2500);
     }
 
     gridInit();
