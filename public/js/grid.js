@@ -169,7 +169,7 @@
         loadingTimeout = setTimeout(function() {
             currentGrid.classList.remove('grid--loading');
             loader._render();
-        }, 2500);
+        }, 1000);
     }
 
     gridInit();
